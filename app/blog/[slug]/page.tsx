@@ -1,6 +1,6 @@
 // app/blog/[slug]/page.tsx
 import { notFound } from 'next/navigation';
-import { allPosts } from 'contentlayer2/generated';
+import { allPosts } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer2/hooks';
 import MDXComponents from '@/components/MDXComponents';
 
