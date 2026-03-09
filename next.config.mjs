@@ -1,6 +1,4 @@
 // next.config.mjs
-import { withContentlayer } from 'next-contentlayer2';
-
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
@@ -8,4 +6,4 @@ const nextConfig = {
   },
 };
 
-export default withContentlayer(nextConfig);
+export default nextConfig;
