@@ -1,7 +1,7 @@
 // app/blog/[slug]/page.tsx
 import { notFound } from 'next/navigation';
-import { allPosts } from 'contentlayer/generated';
-import { useMDXComponent } from 'next-contentlayer/hooks';
+import { allPosts } from 'contentlayer2/generated';
+import { useMDXComponent } from 'next-contentlayer2/hooks';
 import MDXComponents from '@/components/MDXComponents';
 
 type Params = { slug: string };
@@ -20,7 +20,7 @@ export function generateMetadata({ params }: { params: Params }) {
       title: post.title,
       description: post.summary,
       type: 'article',
-      url: `https://example.com/blog/${post.slug}`,
+      url: `https://shekharyadav.com/blog/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
