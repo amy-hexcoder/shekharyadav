@@ -1,6 +1,6 @@
 // app/blog/page.tsx
 import Link from 'next/link';
-import { allPosts } from 'contentlayer/generated';
+import { allPosts } from '@/.contentlayer/generated';
 
 function byDateDesc(a: any, b: any) {
   return new Date(b.date).getTime() - new Date(a.date).getTime();
