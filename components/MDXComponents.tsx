@@ -1,19 +1,8 @@
 // components/MDXComponents.tsx
-'use client'
+import React from 'react';
 
-import { useMDXComponent } from 'next-contentlayer2/hooks'
-import MDXComponents from '@/components/MDXComponents'
+type Props = { components?: Record<string, React.ComponentType<any>>; children: React.ReactNode };
 
-type Props = {
-  code: string
-}
-
-export default function MDXContent({ code }: Props) {
-  const Component = useMDXComponent(code)
-
-  return (
-    <MDXComponents>
-      <Component />
-    </MDXComponents>
-  )
+export default function MDXComponents({ children }: Props) {
+  return <div className="prose prose-neutral max-w-none">{children}</div>;
 }
