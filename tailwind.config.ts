@@ -28,13 +28,12 @@ const config: Config = {
         sans: ['Inter', 'SF Pro Text', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
       },
       colors: {
-        // Semantic tokens (feel free to tweak)
         bg: '#ffffff',
         fg: '#0a0a0a',
         muted: '#6b7280',
         border: '#e5e7eb',
         accent: {
-          DEFAULT: '#0ea5e9', // cyan-500 vibe
+          DEFAULT: '#0ea5e9',
           600: '#0891b2',
           700: '#0e7490',
         },
@@ -66,4 +65,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
