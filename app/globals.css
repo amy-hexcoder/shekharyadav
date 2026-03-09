@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Tokens (Tailwind v4) */
 @theme {
   --font-sans: Inter, "SF Pro Text", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
@@ -20,61 +21,23 @@
   --shadow-pill: 0 1px 2px rgba(0,0,0,0.06);
 }
 
-/* Keep the rest of your file (base/components/utilities, bg-grid, ambient, etc.) */
-/* Ensure you still have your @layer base/components blocks using bg-bg, text-fg, etc. */
-
-/* Ensure you already have: @import "tailwindcss"; and your @theme tokens above */
-
-@layer utilities {
-  /* Base button */
-  .btn {
-    @apply inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium transition
-           focus:outline-none focus:ring-2 focus:ring-accent/40;
-  }
-
-  /* Variants — no @apply btn here */
-  .btn-primary {
-    @apply bg-fg text-white hover:bg-neutral-800;
-  }
-  .btn-ghost {
-    @apply border border-border bg-white hover:bg-neutral-50;
-  }
-  .btn-accent {
-    @apply bg-accent text-white hover:bg-accent-600;
-  }
-}
-
-
-/* Base reset + rendering polish */
+/* Base */
 @layer base {
-  :root {
-    color-scheme: light;
-  }
-  html, body {
-    @apply bg-bg text-fg antialiased;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
-  ::selection {
-    background: rgba(14,165,233,0.15); /* accent tint */
-  }
-  h1, h2, h3 {
-    @apply tracking-tight;
-  }
-  h1 { @apply font-semibold; }
-  h2 { @apply font-semibold; }
+  :root { color-scheme: light; }
+  html, body { @apply bg-bg text-fg font-sans antialiased; }
+  ::selection { background: rgba(14,165,233,0.15); }
+  h1, h2, h3 { @apply tracking-tight; }
+  h1, h2 { @apply font-semibold; }
   a { @apply text-fg; }
 }
 
-/* Subtle lab-style grid with radial mask for focus */
+/* Ambient and grid backgrounds (no @apply needed) */
 .bg-grid {
   position: relative;
 }
 .bg-grid::before {
   content: '';
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background-image:
     linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
@@ -82,15 +45,13 @@
   mask-image: radial-gradient(ellipse at center, black 68%, transparent 100%);
   pointer-events: none;
 }
-
-/* Soft radial ambient to remove the “flat” look */
 .ambient {
   background:
     radial-gradient(1200px 500px at 70% -10%, rgba(14,165,233,0.08), transparent 60%),
     radial-gradient(900px 400px at -10% 10%, rgba(14,165,233,0.06), transparent 60%);
 }
 
-/* Link underline with Apple-like precision */
+/* Link underline */
 .link-underline {
   background-image: linear-gradient(currentColor, currentColor);
   background-repeat: no-repeat;
@@ -98,45 +59,24 @@
   background-size: 0% 1px;
   transition: background-size 200ms ease;
 }
-.link-underline:hover {
-  background-size: 100% 1px;
-}
+.link-underline:hover { background-size: 100% 1px; }
 
-/* Reusable UI components */
-@layer components {
-  .section {
-    @apply py-14 md:py-20;
-  }
-  .container-tight {
-    @apply container max-w-7xl;
-  }
+/* Utilities/Components — only @apply Tailwind utilities */
+@layer utilities {
+  .section { @apply py-14 md:py-20; }
+  .container-tight { @apply container max-w-7xl; }
 
   .card {
-    @apply rounded-2xl border border-border bg-white shadow-subtle transition-transform duration-200 will-change-transform;
+    @apply rounded-2xl border border-border bg-white shadow-subtle
+           transition-transform duration-200 will-change-transform;
   }
-  .card:hover {
-    transform: translateY(-2px);
-  }
+  .card:hover { @apply -translate-y-0.5 shadow-float; }
 
-  .btn {
-    @apply inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-accent/40;
-  }
-  .btn-primary {
-    @apply btn bg-fg text-white hover:bg-neutral-800;
-  }
-  .btn-ghost {
-    @apply btn border border-border bg-white hover:bg-neutral-50;
-  }
-  .btn-accent {
-    @apply btn bg-accent text-white hover:bg-accent-600;
-  }
-
-  .nav-link {
-    @apply text-sm text-neutral-700 hover:text-fg transition link-underline;
-  }
+  .nav-link { @apply text-sm text-neutral-700 hover:text-fg transition; }
 
   .pill {
-    @apply inline-flex items-center rounded-full border border-border bg-white/70 px-2.5 py-1 text-xs text-neutral-700 shadow-pill backdrop-blur;
+    @apply inline-flex items-center rounded-full border border-border bg-white/70
+           px-2.5 py-1 text-xs text-neutral-700 shadow-[var(--shadow-pill)] backdrop-blur;
   }
 
   .eyebrow {
@@ -145,11 +85,23 @@
   }
 
   .field {
-    @apply rounded-md border border-border px-4 py-3 outline-none focus:ring-2 focus:ring-accent/40;
+    @apply rounded-md border border-border px-4 py-3 outline-none
+           focus:ring-2 focus:ring-accent/40;
   }
+
+  /* Buttons — base + variants, no custom-class composition */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium transition
+           focus:outline-none focus:ring-2 focus:ring-accent/40;
+  }
+  .btn-primary { @apply bg-fg text-white hover:bg-neutral-800; }
+  .btn-ghost   { @apply border border-border bg-white hover:bg-neutral-50; }
+  .btn-accent  { @apply bg-accent text-white hover:bg-accent-600; }
 }
 
-/* Fine-tune small motion for load-in */
-.fade-in-up {
-  animation: fadeInUp .5s ease both;
+/* Animation */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
+.fade-in-up { animation: fadeInUp .5s ease both; }
