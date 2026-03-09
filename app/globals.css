@@ -105,3 +105,16 @@
   100% { opacity: 1; transform: translateY(0); }
 }
 .fade-in-up { animation: fadeInUp .5s ease both; }
+
+/* app/globals.css (append) */
+
+/* Article prose tweaks */
+.prose {
+  --tw-prose-headings: #0a0a0a;
+  --tw-prose-body: #1f2937;
+  --tw-prose-links: #0e7490; /* cyan-700-ish */
+  --tw-prose-bullets: #6b7280;
+}
+.prose a:hover {
+  text-decoration: underline;
+}
