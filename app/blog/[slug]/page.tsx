@@ -1,18 +1,27 @@
-// app/blog/[slug]/page.tsx
-import { notFound } from 'next/navigation';
-import { allPosts } from 'contentlayer/generated';
-import { useMDXComponent } from 'next-contentlayer2/hooks';
-import MDXComponents from '@/components/MDXComponents';
+import { notFound } from 'next/navigation'
+import { allPosts } from 'contentlayer/generated'
+import MDXContent from '@/components/MDXContent'
 
-type Params = { slug: string };
+type Params = Promise<{ slug: string }>
 
 export async function generateStaticParams() {
-  return allPosts.map((p) => ({ slug: p.slug }));
+  return allPosts.map((post) => ({
+    slug: post.slug,
+  }))
 }
 
-export function generateMetadata({ params }: { params: Params }) {
-  const post = allPosts.find((p) => p.slug === params.slug);
-  if (!post) return {};
+export async function generateMetadata({
+  params,
+}: {
+  params: Params
+}) {
+  const { slug } = await params
+  const post = allPosts.find((p) => p.slug === slug)
+
+  if (!post) {
+    return {}
+  }
+
   return {
     title: `${post.title} — Shekhar Yadav`,
     description: post.summary,
@@ -27,36 +36,47 @@ export function generateMetadata({ params }: { params: Params }) {
       title: post.title,
       description: post.summary,
     },
-  };
+  }
 }
 
-export default function PostPage({ params }: { params: Params }) {
-  const post = allPosts.find((p) => p.slug === params.slug);
+export default async function PostPage({
+  params,
+}: {
+  params: Params
+}) {
+  const { slug } = await params
+  const post = allPosts.find((p) => p.slug === slug)
 
-  if (!post || post.published === false) return notFound();
-
-  const MDXContent = useMDXComponent(post.body.code);
+  if (!post || post.published === false) {
+    notFound()
+  }
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 md:py-16">
       <header>
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{post.title}</h1>
+        <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
+          {post.title}
+        </h1>
+
         <div className="mt-2 flex items-center gap-3 text-sm text-neutral-500">
-          <time>
+          <time dateTime={post.date}>
             {new Date(post.date).toLocaleDateString(undefined, {
               year: 'numeric',
               month: 'short',
               day: '2-digit',
             })}
           </time>
-          {post.tags?.length ? (
-            <span aria-hidden>•</span>
-          ) : null}
+
+          {post.tags?.length ? <span aria-hidden>•</span> : null}
+
           {post.tags?.length ? (
             <div className="flex flex-wrap gap-2">
-              {post.tags.map((t) => (
-                <span key={t} className="rounded-full border border-neutral-200 px-2 py-0.5">
-                  {t}
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-neutral-200 px-2 py-0.5"
+                >
+                  {tag}
                 </span>
               ))}
             </div>
@@ -65,10 +85,8 @@ export default function PostPage({ params }: { params: Params }) {
       </header>
 
       <div className="mt-8">
-        <MDXComponents>
-          <MDXContent />
-        </MDXComponents>
+        <MDXContent code={post.body.code} />
       </div>
     </article>
-  );
+  )
 }
