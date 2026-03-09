@@ -27,6 +27,7 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-7">
             <Link href="#essays" className="nav-link">Essays</Link>
             <Link href="#projects" className="nav-link">Projects</Link>
+            <Link href="/blog" className="link-underline">Blog</Link>
             <Link href="#about" className="nav-link">About</Link>
             <Link href="#subscribe" className="btn-accent">
               Subscribe
