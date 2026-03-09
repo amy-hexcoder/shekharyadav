@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "contentlayer2 dev && next dev",
+    "build": "contentlayer2 build && next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -14,7 +14,6 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "lucide-react": "^0.500.0"
-
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -25,7 +24,7 @@
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
     "typescript": "^5",
-     "contentlayer2": "*",
+    "contentlayer2": "*",
     "next-contentlayer2": "*",
     "rehype-autolink-headings": "*",
     "rehype-slug": "^6.0.0",
