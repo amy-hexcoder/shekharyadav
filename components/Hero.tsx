@@ -30,7 +30,7 @@ export default function Hero() {
           <div className="flex md:justify-end">
             <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-2xl overflow-hidden shadow-float border border-border bg-white">
               <Image
-                src="/avatar.jpg"
+                src="assets/media/avatar.png"
                 alt="Shekhar Yadav"
                 fill
                 className="object-cover"
