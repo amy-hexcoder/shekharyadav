@@ -23,6 +23,25 @@
 /* Keep the rest of your file (base/components/utilities, bg-grid, ambient, etc.) */
 /* Ensure you still have your @layer base/components blocks using bg-bg, text-fg, etc. */
 
+@layer utilities {
+  /* Base button */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium transition
+           focus:outline-none focus:ring-2 focus:ring-accent/40;
+  }
+
+  /* Variants — no @apply btn here */
+  .btn-primary {
+    @apply bg-fg text-white hover:bg-neutral-800;
+  }
+  .btn-ghost {
+    @apply border border-border bg-white hover:bg-neutral-50;
+  }
+  .btn-accent {
+    @apply bg-accent text-white hover:bg-accent-600;
+  }
+}
+
 /* Base reset + rendering polish */
 @layer base {
   :root {
