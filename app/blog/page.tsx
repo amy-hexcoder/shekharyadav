@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { allPosts } from '@/.contentlayer/generated';
 
 function byDateDesc(a: any, b: any) {
-  return new Date(b.date).getTime() - new Date(a.date).getTime();
+  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 }
 
 export const metadata = {
@@ -33,7 +33,7 @@ export default function BlogPage() {
                 </Link>
               </h2>
               <time className="text-sm text-neutral-500">
-                {new Date(post.date).toLocaleDateString(undefined, {
+                {new Date(post.publishedAt).toLocaleDateString(undefined, {
                   year: 'numeric',
                   month: 'short',
                   day: '2-digit',
