@@ -13,7 +13,7 @@ export default function Newsletter() {
 
   return (
     <section id="subscribe" className="section">
-      <div className="container-tight px-4">
+      <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20">
         <div className="card p-6 md:p-10 bg-white">
           <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
             Join 500+ builders getting weekly insights
