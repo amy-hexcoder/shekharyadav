@@ -4,47 +4,67 @@ import Link from 'next/link';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid" aria-hidden />
-      <div className="relative container-tight px-4 pt-16 pb-12 md:pt-24 md:pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-10 items-center">
-          <div className="fade-in-up">
-            <div className="eyebrow">Builder’s Journal</div>
-            <h1 className="mt-3 text-4xl md:text-6xl font-semibold tracking-tight">
-              Building things. Breaking things. Learning out loud.
-            </h1>
-            <p className="mt-5 text-lg text-muted max-w-2xl">
-            <div className="max-w-4xl mx-auto space-y-6">
-              <p className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                Hey — I'm Shekhar Yadav.
+      <div className="hero-surface">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-[1.35fr_1fr] gap-10 items-center">
+            {/* Left: Copy */}
+            <div>
+              <p className="text-xs font-medium tracking-[0.18em] uppercase text-neutral-500">
+                Builder’s Journal
               </p>
-              
-              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed space-y-4 max-w-3xl mx-auto">
-                  I've started companies, shipped products on day one of the App Store, 
-                  and learned most things the hard way.
-                </p>
-                
-                <p>
-                  This is my workspace: essays on building, tools I've made, experiments in progress.
-                </p>
-                
-                <p className="font-medium text-gray-900">
-                  If you're here to build something real, you're in the right place.
-                </p>        
+
+              <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
+                <span className="text-gradient">Reimagining Innovation</span>
+              </h1>
+
+              <p className="mt-4 text-lg md:text-xl text-neutral-700 max-w-2xl">
+                Amplify the power of ideas through the implementation of discipline, structure,
+                and time‑tested methodologies.
+              </p>
+
+              <p className="mt-4 text-neutral-600 max-w-2xl">
+                I’m Shekhar Yadav — founder, product tinkerer, and chronic experimenter. Essays,
+                projects, and tools for people who build.
+              </p>
+
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center justify-center rounded-md bg-neutral-900 text-white px-5 py-3 hover:bg-neutral-800 transition"
+                >
+                  Read
+                </Link>
+                <Link
+                  href="#subscribe"
+                  className="inline-flex items-center justify-center rounded-md border border-neutral-300 px-5 py-3 hover:bg-neutral-50 transition"
+                >
+                  Subscribe for weekly insights
+                </Link>
+              </div>
             </div>
-            </p>
+
+            {/* Right: Image — larger, integrated */}
+            <div className="flex md:justify-end">
+              <div className="relative w-full max-w-[420px] md:max-w-[520px] mx-auto md:mx-0">
+                {/* Accent halo */}
+                <div className="absolute -inset-3 rounded-[28px] bg-gradient-to-tr from-cyan-400/15 via-indigo-400/10 to-emerald-400/15 blur-xl" />
+                {/* Image */}
+                <div className="relative aspect-square rounded-[28px] overflow-hidden ring-1 ring-neutral-200 shadow-[0_10px_35px_rgba(0,0,0,0.12)] md:translate-x-4">
+                  <Image
+                    src="/avatar.jpg"
+                    alt="Shekhar Yadav"
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="(max-width: 768px) 90vw, 520px"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="flex md:justify-end">
-            <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-2xl overflow-hidden shadow-float border border-border bg-white">
-              <Image
-                src="/media/avatar.png"
-                alt="Shekhar Yadav"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 160px, 224px"
-              />
-            </div>
-          </div>
+          {/* Subtle bottom divider to separate sections */}
+          <div className="mt-12 md:mt-16 h-px bg-neutral-200/70" />
         </div>
       </div>
     </section>
