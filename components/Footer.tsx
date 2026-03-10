@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <footer className="mt-10 border-t border-border">
-      <div className="container-tight px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20">
         <div className="text-sm text-neutral-600">© {new Date().getFullYear()} Shekhar Yadav</div>
         <nav className="flex gap-5 text-sm">
           <Link href="/blog" className="link-underline">Blog</Link>
