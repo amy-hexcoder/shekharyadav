@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/70">
-      <div className="container-tight px-4 py-3">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex items-center justify-between">
           <Link href="/" className="font-semibold tracking-tight">
             SY • Builder

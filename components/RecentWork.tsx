@@ -4,7 +4,8 @@ import { recentPosts, recentProjects } from '@/lib/data';
 export default function RecentWork() {
   return (
     <section id="projects" className="section">
-      <div className="container-tight px-4">
+      <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20">
+
         <div className="flex items-end justify-between">
           <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Recent work</h2>
           <Link href="/blog" className="text-sm text-muted link-underline">View all</Link>

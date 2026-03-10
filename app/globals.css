@@ -194,8 +194,8 @@
   inset: 0;
   background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
   background-size: 12px 12px;
-  mask-image: radial-gradient(ellipse at 50% 40%, black 60%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse at 50% 45%, black 90%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 90%, transparent 100%);
   opacity: 0.7;
   z-index: 0;
 }
