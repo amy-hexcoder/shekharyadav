@@ -7,9 +7,6 @@ export default function Footer() {
         <div className="text-sm text-neutral-600">© {new Date().getFullYear()} Shekhar Yadav</div>
         <nav className="flex gap-5 text-sm">
           <Link href="/blog" className="link-underline">Blog</Link>
-          <Link href="#" className="link-underline">Projects</Link>
-          <Link href="https://linkedin.com/in/shekharyadav" className="link-underline">About</Link>
-          <Link href="#" className="link-underline">Contact</Link>
         </nav>
         <div className="flex gap-4">
           <Link aria-label="LinkedIn" href="https://linkedin.com/in/shekharyadav" className="link-underline text-sm">LinkedIn</Link>
