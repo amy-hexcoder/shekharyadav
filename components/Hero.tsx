@@ -16,15 +16,6 @@ export default function Hero() {
               I’m Shekhar Yadav — serial startup founder, product tinkerer, and chronic experimenter.
               This is my digital workshop: essays, projects, and tools for fellow builders.
             </p>
-
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Link href="#essays" className="btn-primary">
-                Read the Latest
-              </Link>
-              <Link href="#subscribe" className="btn-ghost">
-                Subscribe for weekly insights
-              </Link>
-            </div>
           </div>
 
           <div className="flex md:justify-end">
