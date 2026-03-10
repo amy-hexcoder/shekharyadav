@@ -11,7 +11,6 @@ export default function Page() {
       <Hero />
       <WhatYoullFind />
       <RecentWork />
-      <About />
       <Newsletter />
     </>
   );
