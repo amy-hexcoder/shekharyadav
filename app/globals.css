@@ -254,7 +254,6 @@
 
 /* Layout */
 .mdx-content {
-  max-width: 72ch;
   margin-inline: auto;
   padding: 2rem 1rem;
   background: var(--bg);
@@ -281,11 +280,10 @@
 /* Paragraphs and links */
 .mdx-content p { color: var(--text); }
 .mdx-content a {
-  color: var(--link);
   text-underline-offset: 3px;
   text-decoration-thickness: 1.5px;
 }
-.mdx-content a:hover { color: var(--link-hover); }
+.mdx-content a:hover {  }
 
 /* Lists */
 .mdx-content ul, .mdx-content ol { padding-left: 1.2rem; }
