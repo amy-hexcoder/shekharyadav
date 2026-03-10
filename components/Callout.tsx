@@ -2,42 +2,47 @@
 'use client';
 
 import { ReactNode } from 'react';
+import { InformationCircleIcon, ExclamationTriangleIcon, CheckCircleIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
-interface CalloutProps {
-  type?: 'quote' | 'highlight' | 'info' | 'warning' | 'success';
+type Kind = 'quote' | 'highlight' | 'info' | 'warning' | 'success';
+
+const variants: Record<Kind, string> = {
+  quote: 'bg-blue-50 text-blue-900 ring-1 ring-blue-200 dark:bg-blue-900/15 dark:text-blue-100 dark:ring-blue-800/40',
+  highlight: 'bg-yellow-50 text-yellow-900 ring-1 ring-yellow-200 dark:bg-yellow-900/15 dark:text-yellow-100 dark:ring-yellow-800/40',
+  info: 'bg-slate-50 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-900/40 dark:text-slate-100 dark:ring-slate-800/60',
+  warning: 'bg-orange-50 text-orange-900 ring-1 ring-orange-200 dark:bg-orange-900/15 dark:text-orange-100 dark:ring-orange-800/40',
+  success: 'bg-emerald-50 text-emerald-900 ring-1 ring-emerald-200 dark:bg-emerald-900/15 dark:text-emerald-100 dark:ring-emerald-800/40',
+};
+
+const icons: Record<Kind, JSX.Element> = {
+  quote: <ChatBubbleLeftRightIcon className="h-5 w-5" />,
+  highlight: <InformationCircleIcon className="h-5 w-5" />,
+  info: <InformationCircleIcon className="h-5 w-5" />,
+  warning: <ExclamationTriangleIcon className="h-5 w-5" />,
+  success: <CheckCircleIcon className="h-5 w-5" />,
+};
+
+export function Callout({
+  type = 'info',
+  author,
+  children,
+}: {
+  type?: Kind;
   author?: string;
   children: ReactNode;
-}
-
-export function Callout({ type = 'info', author, children }: CalloutProps) {
-  const styles = {
-    quote: 'border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20',
-    highlight: 'border-l-4 border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20',
-    info: 'border-l-4 border-gray-500 bg-gray-50 dark:bg-gray-900/20',
-    warning: 'border-l-4 border-orange-500 bg-orange-50 dark:bg-orange-900/20',
-    success: 'border-l-4 border-green-500 bg-green-50 dark:bg-green-900/20',
-  };
-
+}) {
   return (
-    <div className={`my-6 p-4 rounded-r-lg ${styles[type]}`}>
-      <div className="flex flex-col">
-        {type === 'quote' && (
-          <svg 
-            className="w-8 h-8 text-gray-400 mb-2" 
-            fill="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-          </svg>
-        )}
-        <div className="prose dark:prose-invert max-w-none">
-          {children}
-        </div>
-        {author && (
-          <div className="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            — {author}
+    <div className={`my-6 rounded-lg p-4 sm:p-5 ${variants[type]}`}>
+      <div className="flex items-start gap-3">
+        <div className="mt-0.5 opacity-80">{icons[type]}</div>
+        <div className="min-w-0">
+          <div className="prose dark:prose-invert max-w-none">
+            {children}
           </div>
-        )}
+          {author && (
+            <div className="mt-2 text-sm font-medium opacity-70">— {author}</div>
+          )}
+        </div>
       </div>
     </div>
   );
