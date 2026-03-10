@@ -14,26 +14,23 @@ export default function Hero() {
             </h1>
             <p className="mt-5 text-lg text-muted max-w-2xl">
             <div className="max-w-4xl mx-auto space-y-6">
-        
-        <p className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-          Hey — I'm Shekhar Yadav.
-        </p>
-        
-        <p className="text-xl md:text-2xl text-gray-700 leading-relaxed space-y-4 max-w-3xl mx-auto">
-            I've started companies, shipped products on day one of the App Store, 
-            and learned most things the hard way.
-          </p>
-          
-          <p>
-            This is my workspace: essays on building, tools I've made, experiments in progress.
-          </p>
-          
-          <p className="font-medium text-gray-900">
-            If you're here to build something real, you're in the right place.
-          </p>
-        </div>
-        
-      </div>
+              <p className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
+                Hey — I'm Shekhar Yadav.
+              </p>
+              
+              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed space-y-4 max-w-3xl mx-auto">
+                  I've started companies, shipped products on day one of the App Store, 
+                  and learned most things the hard way.
+                </p>
+                
+                <p>
+                  This is my workspace: essays on building, tools I've made, experiments in progress.
+                </p>
+                
+                <p className="font-medium text-gray-900">
+                  If you're here to build something real, you're in the right place.
+                </p>        
+            </div>
             </p>
           </div>
 
