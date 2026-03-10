@@ -5,6 +5,9 @@ import { ReactNode } from 'react';
 import { InformationCircleIcon, ExclamationTriangleIcon, CheckCircleIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
 type Kind = 'quote' | 'highlight' | 'info' | 'warning' | 'success';
+type Props = {
+  children: ReactNode;
+};
 
 const variants: Record<Kind, string> = {
   quote: 'bg-blue-50 text-blue-900 ring-1 ring-blue-200 dark:bg-blue-900/15 dark:text-blue-100 dark:ring-blue-800/40',
