@@ -1,13 +1,18 @@
 // components/MDXComponents.tsx
-import React from 'react';
+'use client'
 
-type Props = { components?: Record<string, React.ComponentType<any>>; children: React.ReactNode };
+import type { ReactNode } from 'react'
+
+type Props = {
+  components?: Record<string, React.ComponentType<any>>
+  children: ReactNode
+}
 
 export default function MDXComponents({ children }: Props) {
-  return 
-  <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20">
-    <article
-    className="
+  return (
+    <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20">
+      <article
+        className="
           prose prose-slate dark:prose-invert max-w-3xl mx-auto px-4 py-8
           prose-headings:scroll-m-heading
           prose-headings:font-semibold
@@ -20,7 +25,8 @@ export default function MDXComponents({ children }: Props) {
           prose-img:rounded-xl
         "
       >
-      {children}
-    </article>
-  </div>;
+        {children}
+      </article>
+    </div>
+  )
 }
