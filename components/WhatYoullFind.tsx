@@ -9,7 +9,7 @@ const items = [
 export default function WhatYoullFind() {
   return (
     <section id="essays" className="section">
-      <div className="container-tight px-4">
+      <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20">
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">What you’ll find here</h2>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           {items.map(({ title, body, icon: Icon }) => (
