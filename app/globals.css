@@ -9,7 +9,7 @@
 @layer components {
   /* Better anchors for headings with autolink */
   .prose .anchor {
-    @apply no-underline opacity-0 transition-opacity text-brand-500;
+    @apply no-underline opacity-0 transition-opacity text-blue-500;
     margin-left: 0.25rem;
   }
   .prose h2:hover .anchor,
