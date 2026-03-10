@@ -17,7 +17,7 @@ export default function BlogPage() {
     .sort(byDateDesc);
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 md:py-16">
+    <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
       <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">Essays</h1>
       <p className="mt-3 text-neutral-600">
         Honest notes on building products, leading teams, and tinkering with new ideas.
