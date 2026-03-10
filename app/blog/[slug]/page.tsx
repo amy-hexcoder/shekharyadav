@@ -59,8 +59,8 @@ export default async function PostPage({
         </h1>
 
         <div className="mt-2 flex items-center gap-3 text-sm text-neutral-500">
-          <time dateTime={post.date}>
-            {new Date(post.date).toLocaleDateString(undefined, {
+          <time dateTime={post.publishedAt}>
+            {new Date(post.publishedAt).toLocaleDateString(undefined, {
               year: 'numeric',
               month: 'short',
               day: '2-digit',
