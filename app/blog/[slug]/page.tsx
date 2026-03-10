@@ -86,7 +86,7 @@ export default async function PostPage({
       </header>
 
       <div className="mt-8">
-        <MDXContent code={post.body.code} />
+        <MDXContent code={post.body.code} components={mdxComponents} />
       </div>
     </article>
   )
