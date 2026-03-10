@@ -18,11 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} bg-white text-neutral-900 antialiased`}>
-        <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        </div>
+        <Header />     {/* Header internally centers its content */}
+        <main>{children}</main>  {/* Sections decide if they’re full-bleed or constrained */}
+        <Footer />     {/* Footer internally centers its content */}
       </body>
     </html>
   );
