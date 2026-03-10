@@ -13,8 +13,28 @@ export default function Hero() {
               Building things. Breaking things. Learning out loud.
             </h1>
             <p className="mt-5 text-lg text-muted max-w-2xl">
-              I’m Shekhar Yadav — serial startup founder, product tinkerer, and chronic experimenter.
-              This is my digital workshop: essays, projects, and tools for fellow builders.
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+        
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
+          Hey — I'm Shekhar Yadav.
+        </h1>
+        
+        <div className="text-xl md:text-2xl text-gray-700 leading-relaxed space-y-4 max-w-3xl mx-auto">
+          <p>
+            I've started companies, shipped products on day one of the App Store, 
+            and learned most things the hard way.
+          </p>
+          
+          <p>
+            This is my workspace: essays on building, tools I've made, experiments in progress.
+          </p>
+          
+          <p className="font-medium text-gray-900">
+            If you're here to build something real, you're in the right place.
+          </p>
+        </div>
+        
+      </div>
             </p>
           </div>
 
