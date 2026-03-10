@@ -51,7 +51,7 @@ export default function Hero() {
                 {/* Image */}
                 <div className="relative aspect-square rounded-[28px] overflow-hidden ring-1 ring-neutral-200 shadow-[0_10px_35px_rgba(0,0,0,0.12)] md:translate-x-4">
                   <Image
-                    src="/avatar.jpg"
+                    src="/media/avatar.png"
                     alt="Shekhar Yadav"
                     fill
                     priority
