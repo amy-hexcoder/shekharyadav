@@ -7,7 +7,7 @@ export default function RecentWork() {
       <div className="container-tight px-4">
         <div className="flex items-end justify-between">
           <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Recent work</h2>
-          <Link href="#" className="text-sm text-muted link-underline">View all</Link>
+          <Link href="/blog" className="text-sm text-muted link-underline">View all</Link>
         </div>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
