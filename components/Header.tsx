@@ -25,24 +25,15 @@ export default function Header() {
           </button>
 
           <nav className="hidden md:flex items-center gap-7">
-            <Link href="#essays" className="nav-link">Essays</Link>
             <Link href="#projects" className="nav-link">Projects</Link>
             <Link href="/blog" className="link-underline">Blog</Link>
-            <Link href="#about" className="nav-link">About</Link>
-            <Link href="#subscribe" className="btn-accent">
-              Subscribe
-            </Link>
           </nav>
         </div>
 
         {open && (
           <nav className="md:hidden mt-3 flex flex-col gap-1.5 text-sm">
-            <Link href="#essays" onClick={() => setOpen(false)} className="py-2">Essays</Link>
             <Link href="#projects" onClick={() => setOpen(false)} className="py-2">Projects</Link>
             <Link href="#about" onClick={() => setOpen(false)} className="py-2">About</Link>
-            <Link href="#subscribe" onClick={() => setOpen(false)} className="py-2">
-              <span className="btn-accent">Subscribe</span>
-            </Link>
           </nav>
         )}
       </div>
