@@ -13,7 +13,7 @@ export default function About() {
             forward, you’re in the right place.
           </p>
           <div className="mt-6">
-            <Link href="#" className="link-underline">More about me</Link>
+            <Link href="https://linkedin.com/in/shekharyadav" className="link-underline">More about me</Link>
           </div>
         </div>
       </div>
