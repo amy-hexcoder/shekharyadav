@@ -17,7 +17,7 @@ const variants: Record<Kind, string> = {
   success: 'bg-emerald-50 text-emerald-900 ring-1 ring-emerald-200 dark:bg-emerald-900/15 dark:text-emerald-100 dark:ring-emerald-800/40',
 };
 
-const icons: Record<Kind, JSX.Element> = {
+const icons: Record<Kind, React.JSX.Element> = {
   quote: <ChatBubbleLeftRightIcon className="h-5 w-5" />,
   highlight: <InformationCircleIcon className="h-5 w-5" />,
   info: <InformationCircleIcon className="h-5 w-5" />,
