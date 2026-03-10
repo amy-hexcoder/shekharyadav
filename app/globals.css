@@ -1,4 +1,53 @@
+/* app/globals.css (or a dedicated styles file) */
+
 @import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Better anchors for headings with autolink */
+  .prose .anchor {
+    @apply no-underline opacity-0 transition-opacity text-brand-500;
+    margin-left: 0.25rem;
+  }
+  .prose h2:hover .anchor,
+  .prose h3:hover .anchor,
+  .prose h4:hover .anchor {
+    @apply opacity-100;
+  }
+
+  /* rehype-pretty-code line highlighting */
+  .prose pre code {
+    display: grid;
+  }
+  .prose :where(.line--highlighted) {
+    background-color: rgba(59, 130, 246, 0.12); /* brand-500/12 */
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    border-left: 3px solid rgba(59, 130, 246, 0.6);
+  }
+  .prose :where(.word--highlighted) {
+    background-color: rgba(59, 130, 246, 0.25);
+    border-radius: 0.25rem;
+    padding: 0.05rem 0.15rem;
+  }
+
+  /* Tables: scroll on small screens */
+  .prose .table-wrapper {
+    @apply overflow-x-auto -mx-4 px-4;
+  }
+}
+
+@layer utilities {
+  /* Smooth scroll margin for anchored headings (sticky headers) */
+  .scroll-m-heading {
+    scroll-margin-top: calc(var(--header-height, 64px) + 24px);
+  }
+}
 
 /* Tokens (Tailwind v4) */
 @theme {
