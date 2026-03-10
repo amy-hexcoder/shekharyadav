@@ -13,14 +13,13 @@ export default function Hero() {
               Building things. Breaking things. Learning out loud.
             </h1>
             <p className="mt-5 text-lg text-muted max-w-2xl">
-            <div className="max-w-4xl mx-auto text-center space-y-6">
+            <div className="max-w-4xl mx-auto space-y-6">
         
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
+        <p className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
           Hey — I'm Shekhar Yadav.
-        </h1>
+        </p>
         
-        <div className="text-xl md:text-2xl text-gray-700 leading-relaxed space-y-4 max-w-3xl mx-auto">
-          <p>
+        <p className="text-xl md:text-2xl text-gray-700 leading-relaxed space-y-4 max-w-3xl mx-auto">
             I've started companies, shipped products on day one of the App Store, 
             and learned most things the hard way.
           </p>
