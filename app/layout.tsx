@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth overflow-x-clip">
       <body className={`${inter.className} bg-white text-neutral-900 antialiased`}>
         <Header />     {/* Header internally centers its content */}
         <main>{children}</main>  {/* Sections decide if they’re full-bleed or constrained */}
