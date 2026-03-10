@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import { allPosts } from '@/.contentlayer/generated'
-import MDXContent from '@/components/MDXContent'
+//import MDXContent from '@/components/MDXContent'
+import { useMDXComponent } from 'next-contentlayer/hooks';
+
 import { mdxComponents } from '@/components/mdx-components';
 
 type Params = Promise<{ slug: string }>
@@ -52,6 +54,8 @@ export default async function PostPage({
     notFound()
   }
 
+    const MDXContent = useMDXComponent(post.body.code);
+
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 md:py-16">
       <header>
@@ -85,7 +89,7 @@ export default async function PostPage({
         </div>
       </header>
 
-      <div className="mt-8">
+      <div className="prose prose-lg dark:prose-invert max-w-none">
         <MDXContent code={post.body.code} components={mdxComponents} />
       </div>
     </article>
