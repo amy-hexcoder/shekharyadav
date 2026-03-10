@@ -1,9 +1,11 @@
 import { Wrench, BookOpen, Sparkles } from 'lucide-react';
 
 const items = [
-  { title: 'Essays & Insights', body: 'Short, honest takes on product, startups, and the messy middle of building.', icon: BookOpen },
-  { title: 'Projects & Experiments', body: 'Tiny tools and weekend builds. Some ship, some break — all documented.', icon: Wrench },
-  { title: 'Resources & Recs', body: 'Books, frameworks, and kits I actually use. No fluff.', icon: Sparkles },
+export const sections = [
+  { title: 'Product & Growth', body: 'PMF signals, roadmaps that learn, pricing, and GTM that compounds.', icon: BookOpen },
+  { title: 'Build Lab', body: 'Tiny tools and system patterns — code, screenshots, shipped or scrapped.', icon: Wrench },
+  { title: 'AI Applied', body: 'Practical AI that survives prod: evals, costs, UX, and defensibility.', icon: Sparkles },
+  { title: 'Leadership & Team Ops', body: 'Hiring for velocity, technical product craft, and execution under pressure.', icon: Users }
 ];
 
 export default function WhatYoullFind() {
