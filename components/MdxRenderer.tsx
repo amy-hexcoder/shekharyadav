@@ -9,7 +9,7 @@ export function MdxRenderer({
   components,
 }: {
   code: string;
-  components?: MDXComponents;
+  components?: mdxComponents;
 }) {
   const Component = useMDXComponent(code);
   return <Component components={components} />;
