@@ -1,4 +1,6 @@
 // components/Callout.tsx
+'use client';
+
 import { ReactNode } from 'react';
 
 interface CalloutProps {
