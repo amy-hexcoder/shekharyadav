@@ -10,7 +10,7 @@ type Props = {
 
 export default function MDXComponents({ children }: Props) {
   return (
-    <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20">
+    <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20 mdx-content">
       <article
         className="
           prose prose-slate dark:prose-invert max-w-3xl mx-auto px-4 py-8
