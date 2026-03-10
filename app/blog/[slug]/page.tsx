@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { allPosts } from '@/.contentlayer/generated'
 //import MDXContent from '@/components/MDXContent'
-import { useMDXComponent } from 'next-contentlayer/hooks';
+import { useMDXComponent } from 'next-contentlayer2/hooks';
 
 import { mdxComponents } from '@/components/mdx-components';
 
