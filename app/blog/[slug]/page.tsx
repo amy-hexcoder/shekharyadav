@@ -86,7 +86,7 @@ export default async function PostPage({
         </div>
       </header>
 
-      <div className="prose prose-lg dark:prose-invert max-w-none">
+      <div className="mdx-content prose prose-lg dark:prose-invert max-w-none">
          <MdxRenderer code={post.body.code} />
       </div>
     </article>
