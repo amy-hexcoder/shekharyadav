@@ -106,6 +106,8 @@ export default function Newsletter() {
               required
               placeholder="you@domain.com"
               className="field flex-1"
+              id="email"
+              name="email" 
               aria-label="Email address"
             />
             <button
