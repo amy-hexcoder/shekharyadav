@@ -1,12 +1,13 @@
 // mdx-components.tsx
-import { Callout } from '@/components/Callout';
-import Image from 'next/image';
+import type { MDXComponents } from 'mdx/types'
+import Image from 'next/image'
+import { Callout } from '@/components/Callout'
 
-
-export const mdxComponents = {
+const components: MDXComponents = {
   Callout,
-  Image
-  // You can add more custom components here
-  // Image: CustomImage,
-  // CodeBlock: CustomCodeBlock,
-};
+  Image,
+}
+
+export function useMDXComponents(): MDXComponents {
+  return components
+}
