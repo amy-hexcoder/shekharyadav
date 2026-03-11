@@ -1,19 +1,28 @@
 import Link from 'next/link';
-import { recentPosts, recentProjects } from '@/lib/data';
+import { recentProjects } from '@/lib/data';
+import { allPosts } from '@/.contentlayer/generated';
+
+function byDateDesc(a: any, b: any) {
+  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+}
 
 export default function RecentWork() {
+  const recentPosts = allPosts
+    .filter((p) => p.featured !== false)
+    .sort(byDateDesc);
+
   return (
     <section id="projects" className="section">
       <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20">
 
         <div className="flex items-end justify-between">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Recent work</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Featured</h2>
           <Link href="/blog" className="text-sm text-muted link-underline">View all</Link>
         </div>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
-            <div className="eyebrow">Articles</div>
+            <div className="eyebrow">Recent Articles</div>
             <div className="mt-4 space-y-4">
               {recentPosts.map((p) => (
                 <Link key={p.id} href={p.href} className="block card p-5 bg-white hover:shadow-float">
@@ -30,7 +39,7 @@ export default function RecentWork() {
           </div>
 
           <div>
-            <div className="eyebrow">Projects</div>
+            <div className="eyebrow">My Projects</div>
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {recentProjects.map((x) => (
                 <Link key={x.id} href={x.href} className="card p-5 bg-white hover:shadow-float">
