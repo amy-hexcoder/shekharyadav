@@ -2,13 +2,91 @@
 
 import { FormEvent, useState } from 'react';
 
-export default function Newsletter() {
-  const [status, setStatus] = useState<'idle'|'loading'|'done'|'error'>('idle');
+function getOrCreateAnonId(): string {
+  const key = '23v_anonymous_id';
+  let v = typeof window !== 'undefined' ? window.localStorage.getItem(key) : null;
+  if (!v) {
+    v = (typeof crypto !== 'undefined' && 'randomUUID' in crypto) ? crypto.randomUUID() : `anon_${Math.random().toString(36).slice(2)}`;
+    try { window.localStorage.setItem(key, v); } catch {}
+  }
+  return v!;
+}
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+function collectClientContext() {
+  if (typeof window === 'undefined') return null;
+  const url = new URL(window.location.href);
+  const params = url.searchParams;
+
+  return {
+    page: {
+      url: url.toString(),
+      path: window.location.pathname,
+      title: document.title,
+      referrer: document.referrer || null,
+    },
+    utm: {
+      utm_source: params.get('utm_source'),
+      utm_medium: params.get('utm_medium'),
+      utm_campaign: params.get('utm_campaign'),
+      utm_term: params.get('utm_term'),
+      utm_content: params.get('utm_content'),
+      gclid: params.get('gclid'),
+      fbclid: params.get('fbclid'),
+    },
+    device: {
+      user_agent: navigator.userAgent,
+      language: navigator.language,
+      languages: navigator.languages,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      viewport: { width: window.innerWidth, height: window.innerHeight },
+      screen: { width: window.screen.width, height: window.screen.height, colorDepth: window.screen.colorDepth, pixelRatio: window.devicePixelRatio },
+      hardwareConcurrency: (navigator as any).hardwareConcurrency ?? null,
+      deviceMemory: (navigator as any).deviceMemory ?? null,
+      doNotTrack: (navigator as any).doNotTrack ?? (window as any).doNotTrack ?? null,
+      cookieEnabled: navigator.cookieEnabled,
+      brands: (navigator as any).userAgentData?.brands ?? null,
+      mobile: (navigator as any).userAgentData?.mobile ?? null,
+      platform: (navigator as any).userAgentData?.platform ?? navigator.platform ?? null,
+    },
+    session: { anonymous_id: getOrCreateAnonId() },
+  };
+}
+
+export default function Newsletter() {
+  const [state, setState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [error, setError] = useState<string | null>(null);
+  const context = useMemo(() => collectClientContext(), []);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus('loading');
-    setTimeout(() => setStatus('done'), 800);
+    setState('loading');
+    setError(null);
+
+    const form = new FormData(e.currentTarget);
+    const name = String(form.get('name') || '');
+    const email = String(form.get('email') || '');
+    const company = String(form.get('company') || '');
+    const message = String(form.get('message') || '');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, client_context: context }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data?.ok) {
+        setState('Thanks for subscribing.');
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setState('error');
+        setError(data?.error || 'Failed to subscribe.');
+      }
+    } catch {
+      setState('error');
+      setError('Network error. Please try again.');
+    }
   }
 
   return (
@@ -33,7 +111,7 @@ export default function Newsletter() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="btn-accent"
+              className="btn"
             >
               {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
             </button>
