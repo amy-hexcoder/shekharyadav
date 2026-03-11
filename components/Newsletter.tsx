@@ -110,17 +110,17 @@ export default function Newsletter() {
             />
             <button
               type="submit"
-              disabled={status === 'loading'}
+              disabled={state === 'loading'}
               className="btn"
             >
-              {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
+              {state === 'loading' ? 'Subscribing…' : 'Subscribe'}
             </button>
           </form>
 
-          {status === 'done' && (
+          {state === 'done' && (
             <p className="mt-3 text-sm text-green-700">Thanks — check your inbox for a confirmation.</p>
           )}
-          {status === 'error' && (
+          {state === 'error' && (
             <p className="mt-3 text-sm text-red-700">Something went wrong. Please try again.</p>
           )}
         </div>
