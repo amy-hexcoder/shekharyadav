@@ -16,21 +16,20 @@ export default function Hero() {
           {/* Left: Copy */}
           <div>
             <p className="text-xs font-medium tracking-[0.18em] uppercase text-neutral-500">
-              Builder's Journal
+              PRODUCT STRATEGY FOR BUILDERS         
             </p>
 
             <h1 className="mt-4 text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
-              <span className="text-gradient">Reimagining Innovation</span>
+              <span className="text-gradient">Re:imagine Product Thinking (in the AI era)</span>
             </h1>
 
             <p className="mt-5 text-lg md:text-xl text-neutral-700 max-w-2xl leading-relaxed">
-              Amplify the power of ideas through the implementation of discipline, structure,
-              and time‑tested methodologies.
+              A weekly journal on building great products and becoming a better leader—through clear thinking, strong systems, and honest lessons.
             </p>
 
             <p className="mt-5 text-neutral-600 max-w-2xl leading-relaxed">
-              I'm Shekhar Yadav — founder, product tinkerer, and chronic experimenter. Essays,
-              projects, and tools for people who build.
+I’m Shekhar Yadav — founder at 23 Ventures. We’re building some exciting things with AI, and honestly, it’s made me fall in love with building again.
+This is where I share what I’m learning in real time: product thinking, iteration, and the messy middle of shipping.
             </p>
 
           </div>
