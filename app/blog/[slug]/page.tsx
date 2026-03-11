@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { allPosts } from '@/.contentlayer/generated'
 //import MDXContent from '@/components/MDXContent'
 import { MdxRenderer } from '@/components/MdxRenderer';
-import { mdxComponents } from '@/components/mdx-components';
+import { useMDXComponents } from '@/components/mdx-components';
 
 type Params = Promise<{ slug: string }>
 
