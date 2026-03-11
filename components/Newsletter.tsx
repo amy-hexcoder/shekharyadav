@@ -117,7 +117,7 @@ export default function Newsletter() {
             </button>
           </form>
 
-          {state === 'done' && (
+          {state === 'success' && (
             <p className="mt-3 text-sm text-green-700">Thanks — check your inbox for a confirmation.</p>
           )}
           {state === 'error' && (
