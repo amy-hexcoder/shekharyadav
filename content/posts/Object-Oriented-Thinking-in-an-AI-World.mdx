@@ -1,0 +1,418 @@
+---
+title: "Object-Oriented Thinking in an AI World"
+summary: "Why good software architecture principles still matter when building with LLMs. A technical deep-dive into design patterns that work in production AI systems."
+publishedAt: "2024-01-15"
+author: "Shekhar"
+readTime: "12 min read"
+tags: ["AI", "software-architecture", "design-patterns", "engineering", "LLMs"]
+published: true
+featured: true
+---
+
+
+# Object-Oriented Thinking in an AI World
+
+**Why good software architecture principles still matter when building with LLMs**
+
+*By Shekhar*
+
+---
+
+## The Prompt-Driven Chaos
+
+I've been building software for over 25 years. I've seen frameworks come and go. I've watched entire paradigms shift—from procedural to object-oriented, from monoliths to microservices, from REST to GraphQL.
+
+But nothing has made developers abandon good design principles faster than LLMs.
+
+I get it. The first time you see GPT-4 write working code from a natural language prompt, it feels like magic. Why bother with clean architecture when you can just ask the AI to "make it work"?
+
+Here's why: **because six months from now, when that AI-generated code is in production and breaking in weird ways, you're going to wish you'd treated it like the complex, stateful, non-deterministic component it actually is.**
+
+LLMs aren't magic. They're APIs that return text. And like any external service you integrate into your system, they need to be wrapped, abstracted, and managed with discipline.
+
+Let me show you how.
+
+---
+
+## The False Choice: AI vs. Architecture
+
+There's this weird narrative emerging that says: "In the age of AI, traditional software engineering is obsolete."
+
+That's nonsense.
+
+What's actually happening is that **AI is making good architecture more important, not less.**
+
+Why? Because LLMs introduce:
+
+- **Non-determinism** - Same input, different output
+- **Latency** - Network calls that can take seconds
+- **Cost** - Every API call costs money
+- **Versioning complexity** - Model updates can break your app
+- **Debugging nightmares** - How do you debug a prompt?
+
+If you don't have clean separation of concerns, clear interfaces, and testable components, you're building a house of cards.
+
+---
+
+## Principle #1: Encapsulation Isn't Optional
+
+The first mistake I see: developers putting raw OpenAI API calls directly into their business logic.
+
+```python
+# DON'T DO THIS
+def process_user_request(user_input):
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": user_input}]
+    )
+    return response.choices[0].message.content
+```
+
+This looks simple. It's also a disaster waiting to happen.
+
+What happens when:
+- OpenAI changes their API?
+- You want to switch to Anthropic's Claude?
+- You need to add retry logic?
+- You want to cache responses?
+- You need to A/B test different prompts?
+
+**Better approach: Encapsulate the LLM behind an interface.**
+
+```python
+from abc import ABC, abstractmethod
+
+class LLMProvider(ABC):
+    @abstractmethod
+    def generate(self, prompt: str, **kwargs) -> str:
+        pass
+    
+    @abstractmethod
+    def stream(self, prompt: str, **kwargs):
+        pass
+
+class OpenAIProvider(LLMProvider):
+    def __init__(self, model: str = "gpt-4", api_key: str = None):
+        self.model = model
+        self.client = openai.OpenAI(api_key=api_key)
+    
+    def generate(self, prompt: str, **kwargs) -> str:
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=[{"role": "user", "content": prompt}],
+            **kwargs
+        )
+        return response.choices[0].message.content
+    
+    def stream(self, prompt: str, **kwargs):
+        stream = self.client.chat.completions.create(
+            model=self.model,
+            messages=[{"role": "user", "content": prompt}],
+            stream=True,
+            **kwargs
+        )
+        for chunk in stream:
+            if chunk.choices[0].delta.content:
+                yield chunk.choices[0].delta.content
+```
+
+Now your business logic depends on `LLMProvider`, not OpenAI specifically. You can swap providers, add caching layers, implement fallbacks—all without touching your core logic.
+
+This is **the Adapter Pattern**, and it's as relevant today as it was in 1994.
+
+---
+
+## Principle #2: Prompts Are Code
+
+Here's another thing I see constantly: prompts scattered throughout the codebase as string literals.
+
+```python
+# ALSO DON'T DO THIS
+def summarize_document(doc):
+    return llm.generate(f"Summarize this document: {doc}")
+
+def extract_entities(text):
+    return llm.generate(f"Extract named entities from: {text}")
+```
+
+Prompts are logic. They determine behavior. They need versioning, testing, and management.
+
+**Better: Use the Strategy Pattern for prompt management.**
+
+```python
+class PromptStrategy(ABC):
+    @abstractmethod
+    def build_prompt(self, **context) -> str:
+        pass
+
+class DocumentSummaryPrompt(PromptStrategy):
+    def __init__(self, style: str = "concise"):
+        self.style = style
+    
+    def build_prompt(self, document: str, max_length: int = 100) -> str:
+        return f"""Summarize the following document in a {self.style} style.
+Maximum length: {max_length} words.
+
+Document:
+{document}
+
+Summary:"""
+
+class EntityExtractionPrompt(PromptStrategy):
+    def __init__(self, entity_types: list[str]):
+        self.entity_types = entity_types
+    
+    def build_prompt(self, text: str) -> str:
+        types = ", ".join(self.entity_types)
+        return f"""Extract the following entity types from the text: {types}
+
+Text:
+{text}
+
+Return as JSON with entity type as key and list of entities as value.
+"""
+```
+
+Now you can:
+- Version your prompts independently
+- A/B test different prompt strategies
+- Unit test prompt generation
+- Keep prompt engineering separate from business logic
+
+This is how you build systems that don't fall apart when you need to optimize prompt performance.
+
+---
+
+## Principle #3: Chain of Responsibility for Complex Workflows
+
+Most interesting LLM applications aren't single API calls. They're multi-step workflows:
+
+1. Classify user intent
+2. Extract parameters
+3. Generate response
+4. Validate output
+5. Format result
+
+If you write this as a linear script, you'll end up with spaghetti code.
+
+**Better: Use Chain of Responsibility.**
+
+```python
+class LLMHandler(ABC):
+    def __init__(self):
+        self._next_handler: Optional[LLMHandler] = None
+    
+    def set_next(self, handler: 'LLMHandler') -> 'LLMHandler':
+        self._next_handler = handler
+        return handler
+    
+    @abstractmethod
+    def handle(self, context: dict) -> dict:
+        pass
+    
+    def _pass_to_next(self, context: dict) -> dict:
+        if self._next_handler:
+            return self._next_handler.handle(context)
+        return context
+
+class IntentClassifier(LLMHandler):
+    def __init__(self, llm: LLMProvider):
+        super().__init__()
+        self.llm = llm
+    
+    def handle(self, context: dict) -> dict:
+        user_input = context['user_input']
+        intent = self.llm.generate(f"Classify intent: {user_input}")
+        context['intent'] = intent
+        return self._pass_to_next(context)
+
+class ParameterExtractor(LLMHandler):
+    def __init__(self, llm: LLMProvider):
+        super().__init__()
+        self.llm = llm
+    
+    def handle(self, context: dict) -> dict:
+        if context.get('intent') == 'search':
+            params = self.llm.generate(
+                f"Extract search parameters: {context['user_input']}"
+            )
+            context['parameters'] = params
+        return self._pass_to_next(context)
+
+class ResponseGenerator(LLMHandler):
+    def __init__(self, llm: LLMProvider):
+        super().__init__()
+        self.llm = llm
+    
+    def handle(self, context: dict) -> dict:
+        response = self.llm.generate(
+            f"Generate response for {context['intent']}"
+        )
+        context['response'] = response
+        return self._pass_to_next(context)
+
+# Usage
+classifier = IntentClassifier(llm)
+extractor = ParameterExtractor(llm)
+generator = ResponseGenerator(llm)
+
+classifier.set_next(extractor).set_next(generator)
+
+result = classifier.handle({'user_input': 'Find me Italian restaurants nearby'})
+```
+
+Each handler:
+- Has a single responsibility
+- Can be tested independently
+- Can be reordered or replaced
+- Passes context down the chain
+
+This is how you build LLM workflows that don't become unmaintainable messes.
+
+---
+
+## Principle #4: Observability Through the Observer Pattern
+
+LLM calls are expensive and slow. You need visibility into what's happening.
+
+The Observer Pattern gives you clean hooks for logging, monitoring, and debugging without polluting your core logic.
+
+```python
+class LLMObserver(ABC):
+    @abstractmethod
+    def on_request(self, prompt: str, metadata: dict):
+        pass
+    
+    @abstractmethod
+    def on_response(self, response: str, metadata: dict):
+        pass
+    
+    @abstractmethod
+    def on_error(self, error: Exception, metadata: dict):
+        pass
+
+class LoggingObserver(LLMObserver):
+    def on_request(self, prompt: str, metadata: dict):
+        logger.info(f"LLM Request: {metadata.get('model')}")
+        logger.debug(f"Prompt: {prompt[:100]}...")
+    
+    def on_response(self, response: str, metadata: dict):
+        logger.info(f"LLM Response received: {len(response)} chars")
+    
+    def on_error(self, error: Exception, metadata: dict):
+        logger.error(f"LLM Error: {error}")
+
+class MetricsObserver(LLMObserver):
+    def on_request(self, prompt: str, metadata: dict):
+        metrics.increment('llm.requests', tags=[f"model:{metadata.get('model')}"])
+    
+    def on_response(self, response: str, metadata: dict):
+        metrics.histogram('llm.response_length', len(response))
+    
+    def on_error(self, error: Exception, metadata: dict):
+        metrics.increment('llm.errors')
+
+class ObservableLLMProvider(LLMProvider):
+    def __init__(self, provider: LLMProvider):
+        self.provider = provider
+        self.observers: list[LLMObserver] = []
+    
+    def attach(self, observer: LLMObserver):
+        self.observers.append(observer)
+    
+    def generate(self, prompt: str, **kwargs) -> str:
+        metadata = {'model': kwargs.get('model', 'unknown')}
+        
+        for observer in self.observers:
+            observer.on_request(prompt, metadata)
+        
+        try:
+            response = self.provider.generate(prompt, **kwargs)
+            for observer in self.observers:
+                observer.on_response(response, metadata)
+            return response
+        except Exception as e:
+            for observer in self.observers:
+                observer.on_error(e, metadata)
+            raise
+```
+
+Now you can attach logging, metrics, cost tracking, or any other cross-cutting concern without modifying your LLM provider.
+
+---
+
+## The Bigger Picture: Systems Thinking
+
+Here's what I really want you to take away:
+
+**LLMs are components, not solutions.**
+
+The best AI applications I've seen aren't the ones with the cleverest prompts. They're the ones with the cleanest architecture.
+
+When you treat LLMs like any other external service—with proper interfaces, error handling, observability, and testing—you build systems that:
+
+- **Scale** - You can optimize, cache, and parallelize intelligently
+- **Evolve** - You can swap models, update prompts, and add features without rewriting everything
+- **Debug** - You can trace issues through clear component boundaries
+- **Cost-optimize** - You know exactly where tokens are being spent
+
+The developers who win in the AI era won't be the ones who abandon software engineering principles. They'll be the ones who apply those principles to new problems.
+
+---
+
+## Practical Takeaways
+
+If you're building with LLMs, here's what to do:
+
+1. **Never call LLM APIs directly from business logic** - Always wrap them in an interface/adapter
+
+2. **Treat prompts as first-class code** - Version them, test them, manage them systematically
+
+3. **Use established patterns for common problems**:
+   - Adapter for provider abstraction
+   - Strategy for prompt management
+   - Chain of Responsibility for multi-step workflows
+   - Observer for monitoring and logging
+   - Decorator for caching and rate limiting
+
+4. **Design for failure** - LLMs will timeout, hallucinate, and change behavior. Your architecture should handle this gracefully.
+
+5. **Make it testable** - If you can't unit test your LLM integration, your architecture is wrong.
+
+6. **Think in systems** - The LLM is one component. How does it interact with your database, your cache, your API layer? Design those boundaries clearly.
+
+---
+
+## References & Further Reading
+
+- **Design Patterns: Elements of Reusable Object-Oriented Software** by Gang of Four - Still the definitive reference. The patterns are 30 years old and still relevant.
+
+- **Martin Fowler's Refactoring** - [refactoring.com](https://refactoring.com/) - Great resource on keeping code maintainable as requirements change.
+
+- **Simon Willison's Blog** - [simonwillison.net](https://simonwillison.net/) - One of the best practitioners writing about LLM engineering in production.
+
+- **The Twelve-Factor App** - [12factor.net](https://12factor.net/) - Principles for building maintainable services. Apply them to your LLM integrations.
+
+- **Anthropic's Prompt Engineering Guide** - [docs.anthropic.com](https://docs.anthropic.com/claude/docs) - Good technical resource on structured prompting.
+
+---
+
+## Final Thought
+
+I've been in this industry long enough to see a lot of "this changes everything" moments.
+
+The web. Mobile. Cloud. Microservices. Now AI.
+
+And here's what I've learned: **The fundamentals don't change. They just get applied to new problems.**
+
+Object-oriented thinking isn't about classes and inheritance. It's about managing complexity through clear boundaries, single responsibilities, and composable components.
+
+That's as true for LLM-powered applications as it was for the software we were building 25 years ago.
+
+The developers who understand this will build the AI applications that actually last.
+
+---
+
+**About the Author**: Shekhar is a startup founder and product leader with 25+ years of experience building 0→1 companies. He's raised funding from Founders Fund and Sequoia, and was among the first developers to publish apps on the iOS App Store. He currently advises founders on product architecture and AI integration strategies.
+
+---
