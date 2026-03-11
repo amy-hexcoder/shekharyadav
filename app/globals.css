@@ -282,10 +282,12 @@
 .mdx-content a {
   text-underline-offset: 3px;
   text-decoration-thickness: 1.5px;
+  color: var(--text);
 }
 .mdx-content a:hover {  }
 
 /* Lists */
+.mdx-content ul {list-style: default inside;}
 .mdx-content ul, .mdx-content ol { padding-left: 1.2rem; }
 .mdx-content li { margin: 0.35rem 0; }
 .mdx-content li::marker { color: var(--muted); }
