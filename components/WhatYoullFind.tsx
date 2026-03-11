@@ -4,7 +4,7 @@ const items = [
   { title: 'Product & Growth', body: 'PMF signals, roadmaps that learn, pricing, and GTM that compounds.', icon: BookOpen },
   { title: 'Build Lab', body: 'Tiny tools and system patterns — code, screenshots, shipped or scrapped.', icon: Wrench },
   { title: 'AI Applied', body: 'Practical AI that survives prod: evals, costs, UX, and defensibility.', icon: Sparkles },
-  { title: 'Leadership & Team Ops', body: 'Hiring for velocity, technical product craft, and execution under pressure.', icon: Users }
+  { title: 'Leadership & Team Ops', body: 'Hiring for velocity, technical product craft, and execution under pressure.', icon: Wrench }
 ];
 
 export default function WhatYoullFind() {
