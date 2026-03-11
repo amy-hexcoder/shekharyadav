@@ -25,7 +25,7 @@ export default function RecentWork() {
             <div className="eyebrow">Recent Articles</div>
             <div className="mt-4 space-y-4">
               {recentPosts.map((p) => (
-                <Link key={p.id} href={p.href} className="block card p-5 bg-white hover:shadow-float">
+                <Link key={p.slug} href={p.href} className="block card p-5 bg-white hover:shadow-float">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h4 className="font-semibold">{p.title}</h4>
