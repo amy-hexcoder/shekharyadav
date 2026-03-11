@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} bg-white text-neutral-900 antialiased`}>
         <Header />     {/* Header internally centers its content */}
         <main>{children}</main>  {/* Sections decide if they’re full-bleed or constrained */}
+        <Newsletter />
         <Footer />     {/* Footer internally centers its content */}
       </body>
     </html>
