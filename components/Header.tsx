@@ -7,33 +7,46 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/70">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
+    <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/80 bg-white/90 border-b border-neutral-200/60">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 py-4 md:py-5">
         <div className="flex items-center justify-between">
-          <Link href="/" className="font-semibold tracking-tight">
+          <Link href="/" className="text-[15px] font-semibold tracking-tight text-neutral-900">
             SY • Builder
           </Link>
 
           <button
-            className="md:hidden p-2 rounded hover:bg-neutral-100"
+            className="md:hidden p-2.5 rounded-lg hover:bg-neutral-100 transition"
             aria-label="Toggle menu"
             onClick={() => setOpen((o) => !o)}
           >
-            <div className="w-5 h-0.5 bg-fg mb-1" />
-            <div className="w-5 h-0.5 bg-fg mb-1" />
-            <div className="w-5 h-0.5 bg-fg" />
+            <span className="sr-only">Menu</span>
+            <div className="w-5 h-0.5 bg-neutral-900 mb-1.5" />
+            <div className="w-5 h-0.5 bg-neutral-900 mb-1.5" />
+            <div className="w-5 h-0.5 bg-neutral-900" />
           </button>
 
-          <nav className="hidden md:flex items-center gap-7">
-            <Link href="#projects" className="nav-link">Projects</Link>
-            <Link href="/blog" className="link-underline">Blog</Link>
+          <nav className="hidden md:flex gap-8 text-[15px] items-center">
+            <Link href="/blog" className="link-underline text-neutral-700 hover:text-neutral-900">
+              Blog
+            </Link>
+            <Link href="/projects" className="link-underline text-neutral-700 hover:text-neutral-900">
+              Projects
+            </Link>
+          
+        
           </nav>
         </div>
 
         {open && (
-          <nav className="md:hidden mt-3 flex flex-col gap-1.5 text-sm">
-            <Link href="#projects" onClick={() => setOpen(false)} className="py-2">Projects</Link>
-            <Link href="#about" onClick={() => setOpen(false)} className="py-2">About</Link>
+          <nav className="md:hidden mt-4 pt-4 border-t border-neutral-200 flex flex-col gap-3 text-[15px]">
+          
+            <Link href="/projects" onClick={() => setOpen(false)} className="py-2.5 text-neutral-700">
+              Projects
+            </Link>
+            <Link href="/blog" onClick={() => setOpen(false)} className="py-2.5 text-neutral-700">
+              Blog
+            </Link>
+          
           </nav>
         )}
       </div>
