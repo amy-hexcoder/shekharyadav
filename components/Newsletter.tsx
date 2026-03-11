@@ -94,7 +94,7 @@ export default function Newsletter() {
       <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 md:pt-24 md:pb-20">
         <div className="card p-6 md:p-10 bg-white">
           <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
-            Join 500+ builders getting weekly insights
+            If any of this resonates, you should subscribe.
           </h2>
           <p className="mt-3 text-neutral-700">
             No spam. No fluff. Just honest reflections on building products, leading teams, and staying curious.
