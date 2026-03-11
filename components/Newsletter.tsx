@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useMemo} from 'react';
 
 function getOrCreateAnonId(): string {
   const key = '23v_anonymous_id';
