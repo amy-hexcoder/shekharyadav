@@ -16,6 +16,7 @@
   .prose h3:hover .anchor,
   .prose h4:hover .anchor {
     @apply opacity-100;
+    text-decoration: none;
   }
 
   .prose a:hover {
@@ -291,7 +292,7 @@
 .mdx-content a:hover {  }
 
 /* Lists */
-.mdx-content ul {list-style: default inside;}
+.mdx-content ul {list-style: disc inside;}
 .mdx-content ul, .mdx-content ol { padding-left: 1.2rem; }
 .mdx-content li { margin: 0.35rem 0; }
 .mdx-content li::marker { color: var(--muted); }
