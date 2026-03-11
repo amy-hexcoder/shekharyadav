@@ -77,7 +77,7 @@ export default function Newsletter() {
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data?.ok) {
-        setState('Thanks for subscribing.');
+        setState('success');
         (e.target as HTMLFormElement).reset();
       } else {
         setState('error');
