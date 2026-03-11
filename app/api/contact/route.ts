@@ -96,10 +96,7 @@ export async function POST(req: Request) {
       anonymous_id: context.session.anonymous_id || undefined,
       payload: {
         form: {
-          name,
           email,
-          company: company || null,
-          message,
         },
         context,
       },
