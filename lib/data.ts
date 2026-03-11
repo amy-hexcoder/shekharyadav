@@ -29,13 +29,6 @@ export const recentPosts: Post[] = [
     readTime: '6 min',
     href: '#',
   },
-  {
-    id: 'p3',
-    title: 'Why Small Bets Compound',
-    description: 'Avoid the “one big launch” trap — optimize for momentum.',
-    readTime: '4 min',
-    href: '#',
-  },
 ];
 
 export const recentProjects: Project[] = [
