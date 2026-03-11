@@ -33,20 +33,6 @@ export default function Hero() {
               projects, and tools for people who build.
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Link
-                href="#projects"
-                className="inline-flex items-center justify-center rounded-lg bg-neutral-900 text-white px-6 py-3.5 text-[15px] font-medium hover:bg-neutral-800 transition"
-              >
-                Explore Projects
-              </Link>
-              <Link
-                href="#subscribe"
-                className="inline-flex items-center justify-center rounded-lg border border-neutral-300 px-6 py-3.5 text-[15px] font-medium hover:bg-neutral-50 transition"
-              >
-                Subscribe for weekly insights
-              </Link>
-            </div>
           </div>
 
           {/* Right: Image — blended, no frame */}
@@ -58,7 +44,7 @@ export default function Hero() {
               {/* Image with subtle fade at edges */}
               <div className="relative aspect-square rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
                 <Image
-                  src="/avatar.jpg"
+                  src="/media/avatar.png"
                   alt="Shekhar Yadav"
                   fill
                   priority
