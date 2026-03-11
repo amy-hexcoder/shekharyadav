@@ -29,7 +29,7 @@ export default function RecentWork() {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h4 className="font-semibold">{p.title}</h4>
-                      <p className="mt-1 text-muted">{p.description}</p>
+                      <p className="mt-1 text-muted">{p.summary}</p>
                     </div>
                     <span className="text-xs text-neutral-500 whitespace-nowrap">{p.readTime}</span>
                   </div>
