@@ -26,12 +26,12 @@ function getGeo(h: AnyHeaders) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, company, message, client_context } = body || {};
+    const { email, client_context } = body || {};
 
     // Basic validation
-    if (!name || !email || !message) {
+    if (!email) {
       return NextResponse.json(
-        { ok: false, error: 'Missing required fields: name, email, message' },
+        { ok: false, error: 'Missing required fields: email' },
         { status: 400 }
       );
     }
