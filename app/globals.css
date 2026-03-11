@@ -9,13 +9,17 @@
 @layer components {
   /* Better anchors for headings with autolink */
   .prose .anchor {
-    @apply no-underline opacity-0 transition-opacity text-blue-500;
+    @apply no-underline opacity-0 transition-opacity;
     margin-left: 0.25rem;
   }
   .prose h2:hover .anchor,
   .prose h3:hover .anchor,
   .prose h4:hover .anchor {
     @apply opacity-100;
+  }
+
+  .prose a:hover {
+    text-decoration: none;
   }
 
   /* rehype-pretty-code line highlighting */
@@ -401,7 +405,7 @@
 
 /* Inline headings anchors */
 .mdx-content .heading-anchor {
-  opacity: 0;
+  opacity: 0.8;
   margin-left: 0.25rem;
   text-decoration: none;
 }
