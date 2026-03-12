@@ -20,7 +20,7 @@ const items = [
     title: 'Leadership & Team Ops', 
     body: 'Hiring for velocity, technical product craft, and execution under pressure. How to build teams that ship instead of plan. What changes when you\'re the one making the call with incomplete data. And why the best operators treat org design like system architecture.', 
     icon: Users 
-  },
+  }
 ];
 
 export default function WhatYoullFind() {
