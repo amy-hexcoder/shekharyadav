@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic'; // Add this line right after imports
 import Link from 'next/link';
 import { allPosts } from '@/.contentlayer/generated';
 
-const POSTS_PER_PAGE = 3; // 1 featured + 6 grid
+const POSTS_PER_PAGE = 7; // 1 featured + 6 grid
 
 function byDateDesc(a: any, b: any) {
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
