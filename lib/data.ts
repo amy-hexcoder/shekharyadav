@@ -81,6 +81,14 @@ export const comics: Comic[] = [
     altText: 'AI and the programmer dilemma',
     publishedAt: '2026-01-20',
     caption: 'The future of programming: arguing with AI.',
+  },
+   {
+    id: 'c1',
+    title: 'Coder in the LLM era.',
+    imageUrl: '/comics/coder-in-llm-era.png', // Replace with actual path
+    altText: 'Coder in the LLM Era',
+    publishedAt: '2026-01-20',
+    caption: 'Dev Life in the AI Era.',
   }
 ];
 
