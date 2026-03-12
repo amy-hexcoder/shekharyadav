@@ -30,9 +30,9 @@ export default function ComicStrip() {
             <Image
               src={comic.imageUrl}
               alt={comic.altText}
-             // fill
+              fill
               className="object-contain p-4 md:p-8"
-              //sizes="(max-width: 768px) 100vw, 1200px"
+              sizes="(max-width: 768px) 100vw, 1200px"
               priority
             />
           </div>
