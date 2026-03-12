@@ -1,6 +1,6 @@
 // app/blog/page.tsx
 import Link from 'next/link';
-import { allPosts } from 'contentlayer/generated';
+import { allPosts } from '@/.contentlayer/generated';
 
 const POSTS_PER_PAGE = 7; // 1 featured + 6 grid
 
