@@ -16,11 +16,14 @@ export const metadata = {
 };
 
 type Props = {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>; // Changed to Promise
 };
 
-export default function BlogPage({ searchParams }: Props) {
-  const currentPage = Number(searchParams.page) || 1;
+export default async function BlogPage({ searchParams }: Props) {
+  const params = await searchParams; // Await it
+  const currentPage = Number(params.page) || 1;
+  console.log('Rendering page:', currentPage); // This should log different numbers
+
 
   const publishedPosts = allPosts
     .filter((p) => p.published !== false)
@@ -34,7 +37,7 @@ export default function BlogPage({ searchParams }: Props) {
   const [featuredPost, ...gridPosts] = paginatedPosts;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
+    <div key={currentPage} className="mx-auto max-w-7xl px-4 py-12 md:py-16">
       {/* Header */}
       <div className="max-w-2xl">
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">Essays</h1>
