@@ -89,6 +89,14 @@ export const comics: Comic[] = [
     altText: 'Coder in the LLM Era',
     publishedAt: '2026-01-20',
     caption: 'Dev Life in the AI Era.',
+  },
+  {
+    id: "c2",
+    title: "Swiss Army Knife",
+    imageUrl: "/comics/s-comic-needmachette.png",
+    altText: "Coder realizes AI tools feel powerful but the problem still needs a machete",
+    publishedAt: "2026-03-12",
+    caption: "AI makes you feel like a Swiss Army knife. Some problems still need a machete."
   }
 ];
 
