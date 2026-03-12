@@ -5,7 +5,7 @@ import { allPosts } from '@/.contentlayer/generated';
 const POSTS_PER_PAGE = 7; // 1 featured + 6 grid
 
 function byDateDesc(a: any, b: any) {
-  return new Date(b.date).getTime() - new Date(a.date).getTime();
+  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 }
 
 export const metadata = {
@@ -51,7 +51,7 @@ export default function BlogPage({ searchParams }: Props) {
             <div className="p-8 md:p-12 bg-gradient-to-br from-neutral-50 to-white">
               <div className="flex items-center gap-3 text-sm text-neutral-500">
                 <time>
-                  {new Date(featuredPost.date).toLocaleDateString(undefined, {
+                  {new Date(featuredPost.publishedAt).toLocaleDateString(undefined, {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
@@ -108,7 +108,7 @@ export default function BlogPage({ searchParams }: Props) {
               >
                 <div className="p-6 bg-white h-full flex flex-col">
                   <time className="text-sm text-neutral-500">
-                    {new Date(post.date).toLocaleDateString(undefined, {
+                    {new Date(post.publishedAt).toLocaleDateString(undefined, {
                       year: 'numeric',
                       month: 'short',
                       day: 'numeric',
