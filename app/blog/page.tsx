@@ -1,4 +1,6 @@
 // app/blog/page.tsx
+export const dynamic = 'force-dynamic'; // Add this line right after imports
+
 import Link from 'next/link';
 import { allPosts } from '@/.contentlayer/generated';
 
