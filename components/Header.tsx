@@ -29,8 +29,8 @@ export default function Header() {
             <Link href="/blog" className="link-underline text-neutral-700 hover:text-neutral-900">
               Blog
             </Link>
-            <Link href="/projects" className="link-underline text-neutral-700 hover:text-neutral-900">
-              Projects
+            <Link href="https://23v.co" target="_blank" className="link-underline text-neutral-700 hover:text-neutral-900">
+              23 Ventures Website
             </Link>
           
         
