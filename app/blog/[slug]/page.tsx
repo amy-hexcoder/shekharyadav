@@ -54,7 +54,7 @@ export default async function PostPage({
   }
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12 md:py-16">
+    <article className="mx-auto max-w-5xl px-4 py-12 md:py-16">
       <header>
         <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
           {post.title}
