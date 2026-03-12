@@ -239,7 +239,7 @@
   font-size: 1.04rem;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   .mdx-content {
     --text: #E5E7EB;
     --muted: #9CA3AF;
