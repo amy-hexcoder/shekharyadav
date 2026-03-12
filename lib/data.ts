@@ -61,3 +61,28 @@ export const recentProjects: Project[] = [
     tag: 'Enterprise',
   },
 ];
+
+// Add to existing data.ts
+
+export type Comic = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  altText: string;
+  publishedAt: string; // e.g. "2024-01-15"
+  caption?: string;
+};
+
+export const comics: Comic[] = [
+  {
+    id: 'c1',
+    title: 'AI and the programmer dilemma',
+    imageUrl: '/comics/AI-and-the-programmer-dilemma.png', // Replace with actual path
+    altText: 'AI and the programmer dilemma',
+    publishedAt: '2026-01-20',
+    caption: 'The future of programming: arguing with AI.',
+  }
+];
+
+// Helper to get the latest comic
+export const getLatestComic = () => comics[0];
