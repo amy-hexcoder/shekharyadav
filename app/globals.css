@@ -241,19 +241,23 @@
 
 @media (prefers-color-scheme: light) {
   .mdx-content {
-    --text: #E5E7EB;
-    --muted: #9CA3AF;
-    --border: #2A2F3A;
-    --bg: #0B0F17;
-    --link: #93C5FD;
-    --link-hover: #BFDBFE;
-    --code-bg: #0A0F1E;
-    --inline-code-bg: #111827;
-    --kbd-bg: #0F172A;
-
-    --quote-bg: #0F172A;
-    --quote-border: #60A5FA;
-    --callout-icon: #93C5FD;
+    --text: var(--color-fg);            /* #0a0a0a */
+    --muted: var(--color-muted);        /* #6b7280 */
+    --border: var(--color-border);      /* #e5e7eb */
+    --bg: var(--color-bg);              /* #ffffff */
+  
+    --link: var(--color-accent);        /* #0ea5e9 */
+    --link-hover: var(--color-accent-700); /* #0e7490 */
+  
+    /* Surfaces */
+    --code-bg: #f8fafc;                 /* subtle panel bg */
+    --inline-code-bg: #f3f4f6;          /* slightly stronger for inline */
+    --kbd-bg: #f1f5f9;                  /* small chip background */
+  
+    /* Callouts & quotes */
+    --quote-bg: #f0f9ff;                /* light accent tint */
+    --quote-border: var(--color-accent);    /* #0ea5e9 */
+    --callout-icon: var(--color-accent-600); /* #0891b2 */
   }
 }
 
