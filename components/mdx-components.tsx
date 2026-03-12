@@ -1,6 +1,5 @@
 // mdx-components.tsx
 import type { MDXComponents } from 'mdx/types'
-import Image from 'next/image'
 import { Callout } from '@/components/Callout'
 
 import NextImage, { ImageProps } from 'next/image'
