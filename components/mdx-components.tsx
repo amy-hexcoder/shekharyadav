@@ -3,6 +3,12 @@ import type { MDXComponents } from 'mdx/types'
 import Image from 'next/image'
 import { Callout } from '@/components/Callout'
 
+import NextImage, { ImageProps } from 'next/image'
+
+function Image(props: ImageProps) {
+  return <NextImage {...props} />
+}
+
 const components: MDXComponents = {
   Callout,
   Image,
