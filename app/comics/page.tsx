@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 export default function ComicsPage() {
   return (
     <>
-      <Header />
       <main className="mx-auto max-w-7xl px-4 py-14 md:py-20">
         <div className="max-w-3xl">
           <Link href="/" className="text-sm text-neutral-600 link-underline">
@@ -65,7 +64,6 @@ export default function ComicsPage() {
           </div>
         )}
       </main>
-      <Footer />
     </>
   );
 }
